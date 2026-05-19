@@ -1,0 +1,1 @@
+#glavni program, spaja sve
