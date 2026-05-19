@@ -13,7 +13,7 @@ MAILPIT_PORT = 1025
 MAILPIT_API = "http://mailpit:8025/api"
 
 
-PUTANJA_DATASET = "data/dataset.csv"
+PUTANJA_DATASET = "data/phishing_dataset.csv"
 PUTANJA_REZULTATI = "results/results.csv"
 
 
