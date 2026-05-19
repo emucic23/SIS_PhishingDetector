@@ -1,7 +1,9 @@
 import sys
 import requests
 import time
-from config import MAILPIT_API, PRAG_PHISHING, PRAG_SUMNJIVO
+import csv
+import os
+from config import MAILPIT_API, PRAG_PHISHING, PRAG_SUMNJIVO, PUTANJA_REZULTATI
 from sender_checker import provjeri_posiljatelja
 from language_checker import provjeri_jezik
 
@@ -67,6 +69,19 @@ def ispisi_rezultat(rezultat):
     print(f"Pošiljatelj:  {rezultat['detalji_posiljatelja']}")
     print(f"Jezik:        {rezultat['detalji_jezika']}")
 
+def spremi_rezultat(rezultat):
+    datoteka_postoji = os.path.exists(PUTANJA_REZULTATI)
+    
+    with open(PUTANJA_REZULTATI, "a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=[
+            "id", "subject", "from", "ukupni_bodovi", 
+            "klasifikacija", "detalji_posiljatelja", "detalji_jezika"
+        ])
+        
+        if not datoteka_postoji:
+            writer.writeheader()
+        
+        writer.writerow(rezultat)
 
 def pokreni():
     print("Analyzer pokrenut, čekam emailove...")
@@ -81,6 +96,7 @@ def pokreni():
             if message_id not in analizirani:
                 rezultat = analiziraj_poruku(poruka)
                 ispisi_rezultat(rezultat)
+                spremi_rezultat(rezultat)
                 analizirani.add(message_id)
 
         time.sleep(5)
