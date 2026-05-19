@@ -24,3 +24,5 @@ services:
     environment:
       - MAILPIT_HOST=mailpit
       - MAILPIT_PORT=1025
+      - MAILPIT_API=http://mailpit:8025/api
+    restart: unless-stopped
