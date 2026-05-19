@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+
+  rspamd:
+    image: rspamd/rspamd
+    ports:
+      - "11334:11334"
+
+  analyzer:
+    build: .
+    volumes:
+      - ./data:/app/data
+      - ./results:/app/results
+    depends_on:
+      - mailpit
+      - rspamd
+    environment:
+      - MAILPIT_HOST=mailpit
+      - MAILPIT_PORT=1025
