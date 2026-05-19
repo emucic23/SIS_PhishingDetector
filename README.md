@@ -24,6 +24,10 @@ Svaki indikator donosi bodove, a ukupni score odlučuje o klasifikaciji:
 Mailpit web sučelje: `http://localhost:8025`  
 Rspamd web sučelje: `http://localhost:11334`
 
+## Dataset
+Preuzmite dataset s Kagglea i stavite u `data/` mapu:
+https://www.kaggle.com/datasets/naserabdullahalam/phishing-email-dataset
+
 ## Struktura projekta
 
 | Mapa | Sadržaj |
