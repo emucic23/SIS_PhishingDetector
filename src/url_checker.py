@@ -29,7 +29,6 @@ def izvuci_domenu(url):
  
  
 def izvuci_linkove_iz_html(html_body):
-  """Vraća listu {'prikaz': tekst, 'href': url} iz HTML tijela."""
   soup = BeautifulSoup(html_body, "html.parser")
   linkovi = []
   for tag in soup.find_all("a", href=True):
@@ -41,5 +40,41 @@ def izvuci_linkove_iz_html(html_body):
  
  
 def izvuci_urlove_iz_teksta(tekst):
-  """Vraća listu URL-ova iz plain text tijela."""
   return URL_UZORAK.findall(tekst)
+
+def provjeri_sumnjive_tldove(urlovi):
+  bodovi = 0
+  indikatori = []
+
+  for url in urlovi:
+    domena = izvuci_domenu(url)
+    for tld in SUMNJIVI_TLDOVI:
+      if domena.endswith(tld):
+        bodovi += 3
+        indikatori.append(f"Sumnjivi TLD u URL-u: '{domena}'")
+        break
+
+  return bodovi, indikatori
+
+def provjeri_ip_url(urlovi):
+  bodovi = 0
+  indikatori = []
+
+  for url in urlovi:
+    if IP_UZORAK.match(url):
+      bodovi += 3
+      indikatori.append(f"URL koristi IP adresu umjesto domene: '{url[:60]}'")
+
+  return bodovi, indikatori
+
+def provjeri_url_shortener(urlovi):
+  bodovi = 0
+  indikatori = []
+
+  for url in urlovi:
+    domena = izvuci_domenu(url)
+    if domena in URL_SHORTENERI:
+      bodovi += 3
+      indikatori.append(f"URL shortener skriva odredište: '{domena}'")
+
+  return bodovi, indikatori
