@@ -2,6 +2,8 @@ import re
 from urrlib.parse import urlparse
 from bs4 import BeautifulSoup
 
+from config import BODOVI_SUMNJIVI_URL, POZNATE_MARKE
+
 SUMNJIVI_TLDOVI = {
   ".ru", ".xyz", ".tk", ".top", ".pw", ".cc", ".ga", ".ml", ".cf",
   ".gq", ".work", ".loan", ".click", ".download", ".zip", ".review",
@@ -76,5 +78,51 @@ def provjeri_url_shortener(urlovi):
     if domena in URL_SHORTENERI:
       bodovi += 3
       indikatori.append(f"URL shortener skriva odredište: '{domena}'")
+
+  return bodovi, indikatori
+
+def provjeri_neuskladenost_linka(linkovi):
+  bodovi = 0
+  indikatori = []
+
+  for link in linkovi:
+    prikaz = link["prikaz"]
+    href = link["href"]
+
+    pronasao = re.search(r"([\w-]+\.[a-z]{2,})", prikaz.lower())
+    if not pronasao:
+      continue
+      
+
+    domena_prikaz = pronasao.group(1)
+    domena_href = izvuci_domenu(href)
+
+    if not domena_href:
+      continue
+
+    if domena_prikaz not in domena_href and domena_href not in domena_prikaz:
+      bodovi += BODOVI_SUMNJIVI_URL
+      indikatori.append(
+        f"Neusklađenost linka: prikazano '{domena_prikaz}' vodi na '{domena_href}'"
+      )
+
+  return bodovi, indikatori
+
+def provjeri_imitaciju_marke(urlovi):
+  bodovi = 0
+  indikatori = []
+
+  for url in urlovi:
+    domena = izvuci_domenu(url)
+    for marka in POZNATE_MARKE:
+      marka_clean = marka.lower().replace(" ", "")
+      if marka_clean in domena:
+        dijelovi = domena.split(".")
+        if len(dijelovi) > 2 or (len(dijelovi) == 2 and dijelovi[0] != marka_clean):
+          bodovi += BODOVI_SUMNJIVI_URL
+          indikatori.append(
+            f"Imitacija marke '{marka}' u sumnjivoj domeni: '{domena}'"
+          )
+          break
 
   return bodovi, indikatori
