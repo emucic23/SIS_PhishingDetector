@@ -2,7 +2,7 @@ import re
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 
-from config import BODOVI_SUMNJIVI_URL, POZNATE_MARKE
+from config import BODOVI_SUMNJIVI_URL
 
 SUMNJIVI_TLDOVI = {
   ".ru", ".xyz", ".tk", ".top", ".pw", ".cc", ".ga", ".ml", ".cf",
@@ -15,6 +15,13 @@ URL_SHORTENERI = {
   "buff.ly", "adf.ly", "short.link", "rebrand.ly", "cutt.ly",
   "shorturl.at", "tiny.cc", "cli.re", "shrtco.de"
 }
+
+POZNATE_MARKE = [
+  "paypal", "google", "microsoft", "apple",
+  "amazon", "netflix", "erste", "zaba", "pbz",
+  "facebook", "instagram", "linkedin",
+  "hep", "hrvatskitelekom", "a1"
+]
 
 IP_UZORAK = re.compile(r"https?://(\d{1,3}\.){3}\d{1,3}")
 URL_UZORAK = re.compile(r"https?://[^\s\"'<>]+")

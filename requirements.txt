@@ -2,3 +2,4 @@ pandas
 requests
 matplotlib
 language_tool_python
+beautifulsoup4
