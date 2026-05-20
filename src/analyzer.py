@@ -6,7 +6,7 @@ import os
 from config import MAILPIT_API, PRAG_PHISHING, PRAG_SUMNJIVO, PUTANJA_REZULTATI
 from sender_checker import provjeri_posiljatelja
 from language_checker import provjeri_jezik
-
+from url_checker import provjeri_urlove
 
 def dohvati_poruke():
     url = f"{MAILPIT_API}/v1/messages"
@@ -45,8 +45,8 @@ def analiziraj_poruku(poruka):
 
     rezultat_posiljatelja = provjeri_posiljatelja(from_adresa, reply_to)
     rezultat_jezika = provjeri_jezik(subject, body)
-
-    ukupni_bodovi = rezultat_posiljatelja["bodovi"] + rezultat_jezika["bodovi"]
+    rezultat_urlova = provjeri_urlove(subject, body)
+    ukupni_bodovi = rezultat_posiljatelja["bodovi"] + rezultat_jezika["bodovi"] + rezultat_urlova["bodovi"]
     klasifikacija = odredi_klasifikaciju(ukupni_bodovi)
 
     return {
@@ -56,7 +56,8 @@ def analiziraj_poruku(poruka):
         "ukupni_bodovi": ukupni_bodovi,
         "klasifikacija": klasifikacija,
         "detalji_posiljatelja": rezultat_posiljatelja["objasnjenje"],
-        "detalji_jezika": rezultat_jezika["indikatori"]
+        "detalji_jezika": rezultat_jezika["indikatori"],
+        "detalji_urlova": rezultat_urlova["indikatori"]
     }
 
 
@@ -68,6 +69,7 @@ def ispisi_rezultat(rezultat):
     print(f"Klasifikacija: {rezultat['klasifikacija']}")
     print(f"Pošiljatelj:  {rezultat['detalji_posiljatelja']}")
     print(f"Jezik:        {rezultat['detalji_jezika']}")
+    print(f"URL-ovi:       {rezultat['detalji_urlova']}")
 
 def spremi_rezultat(rezultat):
     datoteka_postoji = os.path.exists(PUTANJA_REZULTATI)
@@ -75,7 +77,7 @@ def spremi_rezultat(rezultat):
     with open(PUTANJA_REZULTATI, "a", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=[
             "id", "subject", "from", "ukupni_bodovi", 
-            "klasifikacija", "detalji_posiljatelja", "detalji_jezika"
+            "klasifikacija", "detalji_posiljatelja", "detalji_jezika", "detalji_urlova"
         ])
         
         if not datoteka_postoji:

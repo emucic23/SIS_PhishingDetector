@@ -1,5 +1,5 @@
 import re
-from urrlib.parse import urlparse
+from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 
 from config import BODOVI_SUMNJIVI_URL, POZNATE_MARKE
@@ -126,3 +126,34 @@ def provjeri_imitaciju_marke(urlovi):
           break
 
   return bodovi, indikatori
+
+def provjeri_urlove(subject, body):
+  if "<a " in body.lower() or "<html" in body.lower():
+    linkovi = izvuci_linkove_iz_html(body)
+    urlovi = [link["href"] for link in linkovi]
+    urlovi += izvuci_urlove_iz_teksta(subject)
+  else:
+    linkovi = []
+    urlovi = izvuci_urlove_iz_teksta(body) + izvuci_urlove_iz_teksta(subject)
+
+  urlovi = list(dict.fromkeys(urlovi))
+
+  if not urlovi and not linkovi:
+    return {"bodovi": 0, "indikatori": []}
+
+  ukupni_bodovi = 0
+  svi_indikatori = []
+
+  provjere = [
+    provjeri_neuskladenost_linka(linkovi),
+    provjeri_sumnjive_tldove(urlovi),
+    provjeri_ip_url(urlovi),
+    provjeri_url_shortener(urlovi),
+    provjeri_imitaciju_marke(urlovi),
+  ]
+
+  for bodovi, indikatori in provjere:
+    ukupni_bodovi += bodovi
+    svi_indikatori.extend(indikatori)
+
+  return {"bodovi": ukupni_bodovi, "indikatori": svi_indikatori}
