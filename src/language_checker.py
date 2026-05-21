@@ -37,7 +37,11 @@ NAREDBENE_FRAZE = [
     "respond immediately",
     "potvrdite odmah",
     "kliknite odmah",
-    "prijavite se odmah"
+    "prijavite se odmah",
+    "click link",
+    "reset now",
+    "update your",
+    "expires today",
 ]
 
 SUMNJIVE_FRAZE = [

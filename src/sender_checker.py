@@ -1,3 +1,6 @@
+#Obmanjivanje prikaznim imenom
+#Neusklađenost Reply-To
+
 import email.utils
 from config import BODOVI_LAZNI_POSILJATELJ, BODOVI_REPLY_TO
 
