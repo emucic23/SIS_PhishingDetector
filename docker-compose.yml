@@ -12,6 +12,9 @@ services:
     image: rspamd/rspamd
     ports:
       - "11334:11334"
+    volumes:
+      - ./rspamd-config/worker-controller.inc:/etc/rspamd/local.d/worker-controller.inc
+      - ./rspamd-config/local.d/phishing_test.conf:/etc/rspamd/local.d/phishing_test.conf
 
   analyzer:
     build: .

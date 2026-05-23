@@ -5,14 +5,14 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from config import PRAG_PHISHING, PRAG_SUMNJIVO
+from config import PRAG_PHISHING, PRAG_SUMNJIVO, PUTANJA_DATASET, PUTANJA_REZULTATI
 from sender_checker import provjeri_posiljatelja
 from language_checker import provjeri_jezik
 from url_checker import provjeri_urlove
 
 
 def ucitaj_dataset():
-    df = pd.read_excel("data/phishing_dataset.xlsx")
+    df = pd.read_csv(PUTANJA_DATASET)          
     print(f"Učitano {len(df)} emailova")
     print(f"Stupci: {list(df.columns)}")
     return df
@@ -29,7 +29,7 @@ def odredi_klasifikaciju(ukupni_bodovi):
 def analiziraj_email(row):
     from_adresa = str(row.get("sender", ""))
     subject = str(row.get("subject", ""))
-    body = str(row.get("email_text", ""))
+    body = str(row.get("body", ""))            
     reply_to = ""
 
     rezultat_posiljatelja = provjeri_posiljatelja(from_adresa, reply_to)
@@ -42,11 +42,14 @@ def analiziraj_email(row):
         rezultat_urlova["bodovi"]
     )
 
-    label_raw = str(row.get("label", "legitimate")).lower()
-    stvarna_oznaka = 1 if "phishing" in label_raw else 0
+    stvarna_oznaka = int(row.get("label", 0))  
 
     return {
         "subject": subject[:50],
+        "from": from_adresa[:50],
+        "bodovi_posiljatelj": rezultat_posiljatelja["bodovi"],
+        "bodovi_jezik": rezultat_jezika["bodovi"],
+        "bodovi_url": rezultat_urlova["bodovi"],
         "ukupni_bodovi": ukupni_bodovi,
         "klasifikacija": odredi_klasifikaciju(ukupni_bodovi),
         "stvarna_oznaka": stvarna_oznaka
@@ -75,12 +78,22 @@ def izracunaj_metriku(rezultati):
     print(f"Lažno negativni:  {lazno_negativni:.1f}%")
     print(f"TP: {tp}, TN: {tn}, FP: {fp}, FN: {fn}")
 
+    return {
+        "tp": tp, "tn": tn, "fp": fp, "fn": fn,
+        "tocnost": tocnost,
+        "stopa_detekcije": stopa_detekcije,
+        "lazno_pozitivni": lazno_pozitivni,
+        "lazno_negativni": lazno_negativni
+    }
+
 
 def spremi_rezultate(rezultati):
+    os.makedirs("results", exist_ok=True)
     putanja = "results/evaluacija.csv"
     with open(putanja, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=[
-            "subject", "ukupni_bodovi", "klasifikacija", "stvarna_oznaka"
+            "subject", "from", "bodovi_posiljatelj", "bodovi_jezik",
+            "bodovi_url", "ukupni_bodovi", "klasifikacija", "stvarna_oznaka"
         ])
         writer.writeheader()
         writer.writerows(rezultati)
@@ -95,15 +108,24 @@ def pokreni_evaluaciju():
         rezultat = analiziraj_email(row)
         rezultati.append(rezultat)
 
-        if (i + 1) % 100 == 0:
+        if (i + 1) % 500 == 0:
             print(f"Analizirano {i + 1}/{len(df)} emailova...")
 
-    phishing_primjeri = [r for r in rezultati if r["stvarna_oznaka"] == 1][:3]
+    # Primjeri phishing emailova
     print("\nPrimjeri phishing emailova:")
+    phishing_primjeri = [r for r in rezultati if r["stvarna_oznaka"] == 1][:3]
     for p in phishing_primjeri:
         print(f"  Subject: {p['subject']}")
-        print(f"  Bodovi: {p['ukupni_bodovi']}")
+        print(f"  Bodovi:  {p['ukupni_bodovi']} (posiljatelj={p['bodovi_posiljatelj']}, jezik={p['bodovi_jezik']}, url={p['bodovi_url']})")
         print(f"  Klasifikacija: {p['klasifikacija']}")
+        print()
+
+    # Primjeri lažno pozitivnih (ham klasificiran kao phishing)
+    print("Primjeri lažno pozitivnih (ham → PHISHING/SUMNJIVO):")
+    fp_primjeri = [r for r in rezultati if r["klasifikacija"] in ["PHISHING", "SUMNJIVO"] and r["stvarna_oznaka"] == 0][:3]
+    for p in fp_primjeri:
+        print(f"  Subject: {p['subject']}")
+        print(f"  Bodovi:  {p['ukupni_bodovi']} (posiljatelj={p['bodovi_posiljatelj']}, jezik={p['bodovi_jezik']}, url={p['bodovi_url']})")
         print()
 
     izracunaj_metriku(rezultati)

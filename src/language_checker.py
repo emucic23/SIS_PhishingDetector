@@ -1,12 +1,6 @@
 import re
-from config import BODOVI_ANOMALIJE_JEZIKA
+from config import BODOVI_ANOMALIJE_JEZIKA, URGENTNE_RIJECI, FRAUD_FRAZE
 
-
-HRVATSKE_RIJECI = [
-    "poštovani", "račun", "lozinka", "potvrdite",
-    "uplata", "banka", "korisnik", "sigurnost",
-    "obavijest", "plaćanje", "kartica"
-]
 
 ENGLESKE_RIJECI = [
     "account", "password", "verify", "login",
@@ -24,33 +18,17 @@ GENERICKI_POZDRAVI = [
     "dear user",
     "dear customer",
     "hello customer",
-    "poštovani korisniče",
-    "dragi korisniče"
 ]
 
 NAREDBENE_FRAZE = [
-    "click now",
-    "act now",
-    "verify now",
-    "confirm now",
-    "login now",
-    "respond immediately",
-    "potvrdite odmah",
-    "kliknite odmah",
-    "prijavite se odmah",
-    "click link",
-    "reset now",
-    "update your",
-    "expires today",
+    "click now", "act now", "verify now", "confirm now",
+    "login now", "respond immediately", "click link",
+    "reset now", "update your", "expires today",
 ]
 
 SUMNJIVE_FRAZE = [
-    "!!!",
-    "???",
-    "free money",
-    "limited time",
-    "winner",
-    "claim your prize"
+    "!!!", "???", "free money", "limited time",
+    "winner", "claim your prize"
 ]
 
 
@@ -65,22 +43,13 @@ def ima_puno_usklicnika(tekst):
 def ima_previse_velikih_slova(subject):
     slova = [z for z in subject if z.isalpha()]
     velika = [z for z in subject if z.isupper()]
-
     if len(slova) <= 5:
         return False
-
     return len(velika) / len(slova) > 0.6
 
 
 def ima_cudne_razmake(tekst):
     return re.search(r"\s{4,}", tekst) is not None
-
-
-def mijesa_jezike(tekst):
-    ima_hr = any(rijec in tekst for rijec in HRVATSKE_RIJECI)
-    ima_en = any(rijec in tekst for rijec in ENGLESKE_RIJECI)
-
-    return ima_hr and ima_en
 
 
 def pronadi_pravopisne_greske(tekst):
@@ -107,6 +76,14 @@ def pronadi_sumnjive_fraze(tekst):
     return [fraza for fraza in SUMNJIVE_FRAZE if fraza in tekst]
 
 
+def pronadi_urgentne_rijeci(tekst):
+    return [rijec for rijec in URGENTNE_RIJECI if rijec in tekst]
+
+
+def pronadi_fraud_fraze(tekst):
+    return [fraza for fraza in FRAUD_FRAZE if fraza in tekst]
+
+
 def provjeri_jezik(subject="", body=""):
     tekst = f"{subject} {body}"
     tekst_lower = tekst.lower()
@@ -120,75 +97,48 @@ def provjeri_jezik(subject="", body=""):
 
     if ima_previse_velikih_slova(subject):
         bodovi += 1
-        dodaj_indikator(
-            indikatori,
-            "Subject sadrži neuobičajeno puno velikih slova"
-        )
+        dodaj_indikator(indikatori, "Subject sadrži neuobičajeno puno velikih slova")
 
     if ima_cudne_razmake(tekst):
         bodovi += 1
-        dodaj_indikator(
-            indikatori,
-            "Poruka sadrži neobično velike razmake"
-        )
-
-    if mijesa_jezike(tekst_lower):
-        bodovi += 1
-        dodaj_indikator(
-            indikatori,
-            "Poruka sadrži miješanje hrvatskog i engleskog jezika"
-        )
+        dodaj_indikator(indikatori, "Poruka sadrži neobično velike razmake")
 
     pravopisne_greske = pronadi_pravopisne_greske(tekst_lower)
-
     if pravopisne_greske:
         bodovi += 1
-        dodaj_indikator(
-            indikatori,
-            "Pronađene moguće pravopisne greške: "
-            + ", ".join(pravopisne_greske)
-        )
+        dodaj_indikator(indikatori, "Pronađene moguće pravopisne greške: " + ", ".join(pravopisne_greske))
 
     if ima_sumnjive_znakove(tekst):
         bodovi += 1
-        dodaj_indikator(
-            indikatori,
-            "Poruka sadrži neobično formatiranje ili sumnjive znakove"
-        )
+        dodaj_indikator(indikatori, "Poruka sadrži neobično formatiranje ili sumnjive znakove")
 
     if koristi_genericki_pozdrav(tekst_lower):
         bodovi += 1
-        dodaj_indikator(
-            indikatori,
-            "Poruka koristi generički pozdrav umjesto imena korisnika"
-        )
+        dodaj_indikator(indikatori, "Poruka koristi generički pozdrav umjesto imena korisnika")
 
     naredbene_fraze = pronadi_naredbene_fraze(tekst_lower)
-
     if naredbene_fraze:
         bodovi += 1
-        dodaj_indikator(
-            indikatori,
-            "Poruka koristi naredbeni/agresivan stil: "
-            + ", ".join(naredbene_fraze)
-        )
+        dodaj_indikator(indikatori, "Naredbeni/agresivan stil: " + ", ".join(naredbene_fraze))
 
     if ima_neobicne_unicode_znakove(tekst):
         bodovi += 1
-        dodaj_indikator(
-            indikatori,
-            "Poruka sadrži veći broj neuobičajenih Unicode znakova"
-        )
+        dodaj_indikator(indikatori, "Poruka sadrži veći broj neuobičajenih Unicode znakova")
 
     sumnjive_fraze = pronadi_sumnjive_fraze(tekst_lower)
-
     if sumnjive_fraze:
         bodovi += 1
-        dodaj_indikator(
-            indikatori,
-            "Pronađeno sumnjivo phishing formatiranje: "
-            + ", ".join(sumnjive_fraze)
-        )
+        dodaj_indikator(indikatori, "Sumnjivo phishing formatiranje: " + ", ".join(sumnjive_fraze))
+
+    urgentne = pronadi_urgentne_rijeci(tekst_lower)
+    if urgentne:
+        bodovi += 1
+        dodaj_indikator(indikatori, "Urgentni jezik: " + ", ".join(urgentne))
+
+    fraud = pronadi_fraud_fraze(tekst_lower)
+    if fraud:
+        bodovi += 2
+        dodaj_indikator(indikatori, "Advance-fee fraud indikatori: " + ", ".join(fraud))
 
     if len(indikatori) >= 2:
         bodovi = max(bodovi, BODOVI_ANOMALIJE_JEZIKA)
@@ -202,15 +152,8 @@ def provjeri_jezik(subject="", body=""):
 
 
 if __name__ == "__main__":
-
     rezultat = provjeri_jezik(
         subject="URGENT VERIFY ACCOUNT NOW!!!",
-        body="""
-        Dear user,
-
-        Poštovani korisniče, your accout is suspended.
-        Confrm your pasword immediatly.     Click now!!!
-        """
+        body="Dear user, your accout is suspended. Confrm your pasword immediatly. Click now!!!"
     )
-
     print(rezultat)

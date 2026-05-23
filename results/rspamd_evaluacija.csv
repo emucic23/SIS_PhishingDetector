@@ -1,0 +1,201 @@
+subject,rspamd_score,rspamd_action,klasifikacija,stvarna_oznaka
+82 new messages in 23 topics - abridged,10.1,add header,PHISHING,0
+RE: italy pics,4.6,greylist,SUMNJIVO,0
+[SM-USERS]  Unknown Date,3.6,no action,LEGITIMNO,0
+From Selah Bekou For The Family,6.649999,add header,SUMNJIVO,1
+"hello rrrrr ,your attention needed",7.5,add header,SUMNJIVO,1
+PLEASE   RESPOND,6.699999,add header,SUMNJIVO,1
+Re: Different delimiters + relay_recipient_maps,4.5,greylist,SUMNJIVO,0
+Donation From Mrs Susan Thompson,7.5,add header,SUMNJIVO,1
+I NEED YOU URGENT BUSINESS ASSISTANCE.,8.35,add header,SUMNJIVO,1
+[PATCH] Time::Piece & matherr on qnx4,3.5,no action,LEGITIMNO,0
+SALE: Save up to 80% and Half-Off Shipping,3.6,no action,LEGITIMNO,0
+From Mrs. G. Ajith Kumar,5.6,greylist,SUMNJIVO,1
+ABSA: Attention Needed,4.55,greylist,SUMNJIVO,1
+Re: Scalar::Util::refaddr,4.5,greylist,SUMNJIVO,0
+RE: New software upgrade,7.05,add header,SUMNJIVO,1
+URGENT REPLY NEEDED,7.975,add header,SUMNJIVO,1
+"Re: ""Nice girl like to chat"" spam",4.5,greylist,SUMNJIVO,0
+"Urgent Attention,",5.5,greylist,SUMNJIVO,1
+[UAI] Call for Tutorial: IUI08 - A new Generation ,5.5,greylist,SUMNJIVO,0
+Re: newbie question: scan msgs smaller than certai,4.5,greylist,SUMNJIVO,0
+Verify Your Account,5.5,greylist,SUMNJIVO,1
+[Perl Jobs] Small order processing job (telecommut,3.6,no action,LEGITIMNO,0
+You have 1 new security message from Chase,4.55,greylist,SUMNJIVO,1
+"Re: New schemes vs recycling ""http:"" (Re: Past LC ",4.5,greylist,SUMNJIVO,0
+Re: postfix in a courier proxy cluster wont delive,4.6,greylist,SUMNJIVO,0
+Re: [opensuse]  [OT] How much power does a PC real,5.6,greylist,SUMNJIVO,0
+Re: [Python-Dev] Decimal(unicode),4.6,greylist,SUMNJIVO,0
+Trade Me -- New Feedback Posted. Auction: 12922828,6.55,add header,SUMNJIVO,0
+Attention: President/Director,6.5,add header,SUMNJIVO,1
+FROM Accountant David,8.0,add header,SUMNJIVO,1
+[perl #47580] OK: perl 5.10.0 +RC1 on amd64-freebs,8.1,add header,SUMNJIVO,0
+Postfix sending mail to just other mail server,5.5,greylist,SUMNJIVO,0
+[Bug 5817] Poorly faked MTA Received headers (Plug,3.6,no action,LEGITIMNO,0
+Re: [opensuse] [OT] How much power does a PC reall,6.649999,add header,SUMNJIVO,0
+GOOD DAY,7.15,add header,SUMNJIVO,1
+[Info-www-search] Your Understanding And Cooperati,5.5,greylist,SUMNJIVO,1
+Greetings...From Rabi,7.5,add header,SUMNJIVO,1
+Administrator,5.5,greylist,SUMNJIVO,1
+=?utf-8?q?Important_=E2=80=93_We_noticed_unusual_a,9.549999,add header,SUMNJIVO,1
+[Python-Dev] Deco,3.5,no action,LEGITIMNO,0
+Announcing the ADC Video Collection for IT,6.55,add header,SUMNJIVO,0
+From:Mrs.Aisha Mohhamed,6.6,add header,SUMNJIVO,1
+"Re: [FoRK] I'd love to do this, and I'm afraid to ",5.649999,greylist,SUMNJIVO,0
+Re: [opensuse] How can the common users use Virtua,7.5,add header,SUMNJIVO,0
+(jose@monkey.org) Urgent Mail Update Required,6.05,add header,SUMNJIVO,1
+Business Venture,3.5,no action,LEGITIMNO,1
+Re: [opensuse] Extensive disk i/o at startup (10.3,4.6,greylist,SUMNJIVO,0
+[perl #46173] possible fd bug in PerlIOStdio_close,4.1,greylist,SUMNJIVO,0
+REQUEST FOR ASSISTANCE IN A FINANCIAL TRANSACTION.,8.0,add header,SUMNJIVO,1
+Re: [Python-Dev] [Distutils] PEP 365 (Adding the p,4.6,greylist,SUMNJIVO,0
+kindly assist me,7.5,add header,SUMNJIVO,1
+Request for help,7.0,add header,SUMNJIVO,1
+Re: [R] Exporting data to a text file,6.5,add header,SUMNJIVO,0
+Consider this Proposal,7.5,add header,SUMNJIVO,1
++ From Portugal & Urgent Reply Needed.+ ,6.0,add header,SUMNJIVO,1
+Re: [opensuse] OpenOffice writer nuisance pop up,4.6,greylist,SUMNJIVO,0
+INVESTMENT REQUEST,6.85,add header,SUMNJIVO,1
+Sphinx 0.3 released,3.6,no action,LEGITIMNO,0
+WARNING : jose@monkey.org Quota Has Exceed Limit! ,6.55,add header,SUMNJIVO,1
+Re: [Python-Dev] [Python-3000] Reminder: last alph,4.6,greylist,SUMNJIVO,0
+Your Checking/Saving Account Malware Attack,4.55,greylist,SUMNJIVO,1
+Re: [opensuse] Defragging: possible?  necessary?,5.6,greylist,SUMNJIVO,0
+"Re: [opensuse] Use entire disk, and not a partitio",4.5,greylist,SUMNJIVO,0
+Webcast Roundup: Who's Reading Your Old Disk Drive,4.649999,greylist,SUMNJIVO,0
+Cracking open Apple's ultra-thin MacBook Air,4.55,greylist,SUMNJIVO,0
+S.E.M PAUL ANTOINE BOHOUN BOUABRE,7.024999,add header,SUMNJIVO,1
+svn commit: r583977 - /spamassassin/tags/sa-update,3.6,no action,LEGITIMNO,0
+How one can become a terrorist?,7.5,add header,SUMNJIVO,1
+Too false negative,3.5,no action,LEGITIMNO,0
+FAMILY BUSINESS ASSISTANCE,6.949999,add header,SUMNJIVO,1
+Re: [FoRK] Google age-discrimination suit,4.5,greylist,SUMNJIVO,0
+VERY IMPORTANT,7.6,add header,SUMNJIVO,1
+PROPOSAL !,8.25,add header,SUMNJIVO,1
+Re: SA - rules question,4.5,greylist,SUMNJIVO,0
+Joyce,5.5,greylist,SUMNJIVO,1
+HIGHLY CONFIDENTIAL,6.925,add header,SUMNJIVO,1
+[R] problem running R,3.6,no action,LEGITIMNO,0
+REPLY UNGENT   ,5.225,greylist,SUMNJIVO,1
+Important Update About Your Netflix Subscription.,4.55,greylist,SUMNJIVO,1
+Urgent,7.5,add header,SUMNJIVO,1
+1 new message in 1 topic - abridged,3.6,no action,LEGITIMNO,0
+[UAI] IJAR,6.25,add header,SUMNJIVO,0
+[opensuse] kismet and ipw 3945,3.6,no action,LEGITIMNO,0
+Standard Bank Account eStatement 2021-03-10,6.55,add header,SUMNJIVO,1
+DEAR  BENEFICIARY,6.774999,add header,SUMNJIVO,1
+[FoRK] Bone's Tenth,3.6,no action,LEGITIMNO,0
+Your payment has been approved,3.5,no action,LEGITIMNO,1
+Re: [opensuse] ssh: Connection reset by peer,4.6,greylist,SUMNJIVO,0
+A New Wells Fargo. Bill Pay: Payee'(s) Added.,4.649999,greylist,SUMNJIVO,1
+[Bug 5830] MSGID_OUTLOOK_INVALID and BROKEN,3.6,no action,LEGITIMNO,0
+Re: [opensuse] Is it possible to force postfix to ,5.649999,greylist,SUMNJIVO,0
+[Infected Attachment Removed] Unexpected sign-in a,6.5,add header,SUMNJIVO,1
+Your  Acount  Has  Been  Detected,4.55,greylist,SUMNJIVO,1
+Re: Time to make multi.uribl.org optional rather t,7.5,add header,SUMNJIVO,0
+Re: [ILUG] linux laptop: T61p or Macbook Pro,7.0,add header,SUMNJIVO,0
+confindensal partnership....Diamonds Stones For Sa,8.0,add header,SUMNJIVO,1
+"PLEASE STAND ON MY BEHALF,",9.45,add header,SUMNJIVO,1
+Re: Broken Perl OO-parent-method call,7.05,add header,SUMNJIVO,0
+Re: [SM-USERS] Receipt Messages,6.5,add header,SUMNJIVO,0
+Please Confirm Your Account,6.55,add header,SUMNJIVO,1
+[opensuse] Is there a printing expert in the house,4.5,greylist,SUMNJIVO,0
+RE: Changing email address for these,7.05,add header,SUMNJIVO,0
+from Mrs.Johnson,8.55,add header,SUMNJIVO,1
+jose@monkey.org Sync Issues,4.55,greylist,SUMNJIVO,1
+Your confidence. ,6.0,add header,SUMNJIVO,1
+Your Account Is Unverified!,6.5,add header,SUMNJIVO,1
+[R] Matrix multiplication,5.5,greylist,SUMNJIVO,0
+Re: kurila 1.3 released,4.6,greylist,SUMNJIVO,0
+We're having some trouble with your current billin,4.649999,greylist,SUMNJIVO,1
+Email Activition jose@monkey.org,4.55,greylist,SUMNJIVO,1
+jose@monkey.org warning delivery notification,4.55,greylist,SUMNJIVO,1
+Re: [opensuse] Defragging: possible?  necessary?,6.649999,add header,SUMNJIVO,0
+Greetings!,3.5,no action,LEGITIMNO,1
+"WITH LOVE IN God bless you in God i trust ,",5.6,greylist,SUMNJIVO,1
+Re: [FoRK] interesting video on Hillary,6.0,add header,SUMNJIVO,0
+POCUREMENT OF GARNET IN MALAYSIA,7.9,add header,SUMNJIVO,1
+Re: [Python-Dev] Python XML Validator,6.5,add header,SUMNJIVO,0
+[python-win32] OE/WAB help with VB ...,3.6,no action,LEGITIMNO,0
+monkey.org E-mail Notice 7/12/2022 3:24:47 a.m.,4.649999,greylist,SUMNJIVO,1
+Re: [Python-Dev] Decimal(unicode),4.6,greylist,SUMNJIVO,0
+[UAI] CP-AI-OR 2005: Second call for participation,3.6,no action,LEGITIMNO,0
+Hello/Urgent,8.5,add header,SUMNJIVO,1
+TRUST ,9.45,add header,SUMNJIVO,1
+Urgent Attention!,7.0,add header,SUMNJIVO,1
+Re: [opensuse] vmware server and sound,4.5,greylist,SUMNJIVO,0
+Re: fatal: bad string length 0 < 1: virtual_mailbo,4.6,greylist,SUMNJIVO,0
+CHARITY,6.024999,add header,SUMNJIVO,1
+URGENT RESPONSE,12.525,add header,PHISHING,1
+"US Senate as ""bad internet citizens""???",6.5,add header,SUMNJIVO,0
+Re: NTL Digital TV quality (was Re: [ILUG] Broadba,4.6,greylist,SUMNJIVO,0
+hello,5.0,greylist,SUMNJIVO,1
+[PownceAPI] Pownce AIM,3.6,no action,LEGITIMNO,0
+[ie-rant] surprising: obesity is now a bigger prob,3.6,no action,LEGITIMNO,0
+Your Mailbox,7.55,add header,SUMNJIVO,1
+[UAI] Post-doc position in RL at McGill,3.6,no action,LEGITIMNO,0
+URGENT REPLY PLEASE.,7.1,add header,SUMNJIVO,1
+[UAI] BIRD Call for papers and posters: New submis,4.55,greylist,SUMNJIVO,0
+ASSISTANT REQUIRED,8.85,add header,SUMNJIVO,1
+Re: Broken OO-parent-method call & can(),4.6,greylist,SUMNJIVO,0
+From Mr. MARK LEE,5.5,greylist,SUMNJIVO,1
+URGENT MESSAGE....,6.35,add header,SUMNJIVO,1
+Memo from lisa,6.05,add header,SUMNJIVO,1
+GOOD DAY.,6.175,add header,SUMNJIVO,1
+[Fwd: Re: [ILUG] Linux PCs from Tesco],3.6,no action,LEGITIMNO,0
+Re: kurila 1.3 released,7.05,add header,SUMNJIVO,0
+[opensuse] Does openSUSE kernel support ramdisk??,6.5,add header,SUMNJIVO,0
+RE: patch for ext/IO_Compress_Zlib/t/101truncate-d,5.649999,greylist,SUMNJIVO,0
+Email from Samiu,7.5,add header,SUMNJIVO,1
+Re: Fwd: Re: [ILUG] pam and ldap and filesystem pe,4.6,greylist,SUMNJIVO,0
+Breaking News: Split verdict reached in Gitmo war ,3.6,no action,LEGITIMNO,0
+You May Reply Please !!,7.5,add header,SUMNJIVO,1
+We noticed some unusual activity on your PayPal ac,5.0,greylist,SUMNJIVO,1
+Re: [Fwd: FAIL Time-HiRes-1.9708 x86_64-linux-thre,4.6,greylist,SUMNJIVO,0
+Re: [Python-Dev] Module properties for C modules,4.6,greylist,SUMNJIVO,0
+[Ip-health] Biogenerics to help save nearly $100Bn,4.5,greylist,SUMNJIVO,0
+Re: [Python-Dev] How we can get rid of eggs for 2.,6.0,add header,SUMNJIVO,0
+monkey.org Warning: Verify your email jose@monkey.,6.55,add header,SUMNJIVO,1
+Greetings From Dorise,8.549999,add header,SUMNJIVO,1
+Re: [python-win32] QueryInterface fails with objec,4.6,greylist,SUMNJIVO,0
+Re: [opensuse] Setting up a mail server,4.6,greylist,SUMNJIVO,0
+DEAR FRIEND,4.424999,greylist,SUMNJIVO,1
+urgent,5.55,greylist,SUMNJIVO,1
+Re: New Order Inquiry,4.5,greylist,SUMNJIVO,1
+PRIVATE,6.024999,add header,SUMNJIVO,1
+attachment blocking with body_checks,6.175,add header,SUMNJIVO,0
+Re: [opensuse] S-ATA hardware RAID controller,4.5,greylist,SUMNJIVO,0
+Quarantine Digest,5.5,greylist,SUMNJIVO,1
+"[FoRK] Clever: Windbelt, Cheap Generator Alternati",6.55,add header,SUMNJIVO,0
+TREAT AS URGENT AND CALL ME:+226 7650 9277.,6.6,add header,SUMNJIVO,1
+How do I delete a project?,4.6,greylist,SUMNJIVO,0
+Re: [Python-3000] PEP 8 Style Guide and Python 3,4.6,greylist,SUMNJIVO,0
+Re: [R] recursive root finding,7.55,add header,SUMNJIVO,0
+Re: [d@DCC] Please tell me what to call this...,6.0,add header,SUMNJIVO,0
+Re: Low scores,4.6,greylist,SUMNJIVO,0
+PROJECT INTEREST.,6.774999,add header,SUMNJIVO,1
+Charity Assitant,7.5,add header,SUMNJIVO,1
+URGENT RESPONSE NEEDED ,7.824999,add header,SUMNJIVO,1
+The jet set,3.5,no action,LEGITIMNO,0
+ASSISTANCE,8.75,add header,SUMNJIVO,1
+ATTENTION,8.174999,add header,SUMNJIVO,1
+[store L2] [opensuse] Desperate Situation,3.6,no action,LEGITIMNO,0
+"[opensuse] OpenSuSE ""Central"" management system",5.5,greylist,SUMNJIVO,0
+Alert: Your jose@monkey.org Storage Qouta Has been,4.55,greylist,SUMNJIVO,1
+YOUR  ADVICE,8.4,add header,SUMNJIVO,1
+monkey.org Failure Delivery Notification.,9.05,add header,SUMNJIVO,1
+"Dear,",6.649999,add header,SUMNJIVO,1
+Re: [spambayes-dev] Feedback requested on an exter,4.5,greylist,SUMNJIVO,0
+Unexpected sign-in attempt on jose@monkey.org,4.6,greylist,SUMNJIVO,1
+Re: Current status of blead@32211 on VMS for me.,6.0,add header,SUMNJIVO,0
+Re: [opensuse] Screen Capture,4.6,greylist,SUMNJIVO,0
+FROM MR BENSON EKO,7.85,add header,SUMNJIVO,1
+HELP SERVE HUMANITY,6.925,add header,SUMNJIVO,1
+Microsoft: Streaming Office 'infringes license' | ,7.05,add header,SUMNJIVO,0
+"Dear,",5.5,greylist,SUMNJIVO,1
+Re: [Python-Dev] Code signing of Windows .msi/.dll,4.6,greylist,SUMNJIVO,0
+I Need Your Assistance.,6.0,add header,SUMNJIVO,1
+Re: [spambayes-dev] spoof detector,4.6,greylist,SUMNJIVO,0
+Re: [Python-Dev] 3rd party developers: don't chang,4.6,greylist,SUMNJIVO,0
+Password will expire in 3 days,4.649999,greylist,SUMNJIVO,1
+Your Email account update jose@monkey.org,4.55,greylist,SUMNJIVO,1
