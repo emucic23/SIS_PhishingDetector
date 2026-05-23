@@ -2,7 +2,7 @@ import re
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 
-from config import BODOVI_SUMNJIVI_URL
+from config import BODOVI_SUMNJIVI_URL, WHITELIST_URL_DOMENA
 
 SUMNJIVI_TLDOVI = {
     ".ru", ".xyz", ".tk", ".top", ".pw", ".cc", ".ga", ".ml", ".cf",
@@ -41,6 +41,11 @@ def izvuci_domenu(url):
         return ""
 
 
+def je_whitelist_url(url):
+    domena = izvuci_domenu(url)
+    return any(wl in domena for wl in WHITELIST_URL_DOMENA)
+
+
 def izvuci_linkove_iz_html(html_body):
     soup = BeautifulSoup(html_body, "html.parser")
     linkovi = []
@@ -60,6 +65,8 @@ def provjeri_sumnjive_tldove(urlovi):
     bodovi = 0
     indikatori = []
     for url in urlovi:
+        if je_whitelist_url(url):
+            continue
         domena = izvuci_domenu(url)
         for tld in SUMNJIVI_TLDOVI:
             if domena.endswith(tld):
@@ -73,6 +80,8 @@ def provjeri_ip_url(urlovi):
     bodovi = 0
     indikatori = []
     for url in urlovi:
+        if je_whitelist_url(url):
+            continue
         if IP_UZORAK.match(url):
             bodovi += 3
             indikatori.append(f"URL koristi IP adresu umjesto domene: '{url[:60]}'")
@@ -83,6 +92,8 @@ def provjeri_url_shortener(urlovi):
     bodovi = 0
     indikatori = []
     for url in urlovi:
+        if je_whitelist_url(url):
+            continue
         domena = izvuci_domenu(url)
         if domena in URL_SHORTENERI:
             bodovi += 3
@@ -94,6 +105,8 @@ def provjeri_neuskladenost_linka(linkovi):
     bodovi = 0
     indikatori = []
     for link in linkovi:
+        if je_whitelist_url(link["href"]):
+            continue
         prikaz = link["prikaz"]
         href = link["href"]
         pronasao = re.search(r"([\w-]+\.[a-z]{2,})", prikaz.lower())
@@ -115,6 +128,8 @@ def provjeri_imitaciju_marke(urlovi):
     bodovi = 0
     indikatori = []
     for url in urlovi:
+        if je_whitelist_url(url):
+            continue
         domena = izvuci_domenu(url)
         for marka in POZNATE_MARKE:
             marka_clean = marka.lower().replace(" ", "")

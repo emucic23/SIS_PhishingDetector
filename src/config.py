@@ -3,14 +3,14 @@ BODOVI_LAZNI_POSILJATELJ = 2
 BODOVI_REPLY_TO = 2
 BODOVI_ANOMALIJE_JEZIKA = 3
 
-PRAG_PHISHING = 4      # sniženo s 5 — Nigerian_Fraud teško skupi 5 bodova
+PRAG_PHISHING = 4
 PRAG_SUMNJIVO = 2
 
 MAILPIT_HOST = "mailpit"
 MAILPIT_PORT = 1025
 MAILPIT_API = "http://mailpit:8025/api"
 
-PUTANJA_DATASET = "data/phishing_dataset_novi.csv"   # novi CSV umjesto xlsx
+PUTANJA_DATASET = "data/phishing_dataset_novi.csv"
 PUTANJA_REZULTATI = "results/results.csv"
 
 POZNATE_DOMENE = [
@@ -20,6 +20,22 @@ POZNATE_DOMENE = [
     "fer.hr",
     "foi.hr",
     "unizg.hr"
+]
+
+#emailovi s ovih domena dobivaju -2 boda jer su to legitimni pošiljatelji
+WHITELIST_DOMENA = [
+    "apache.org", "python.org", "github.com",
+    "lists.ubuntu.com", "sourceforge.net",
+    "kernel.org", "mozilla.org", "debian.org",
+    "redhat.com", "ubuntu.com", "gnu.org",
+    "issues.apache.org", "mail.python.org"
+]
+
+WHITELIST_URL_DOMENA = [
+    "google.com", "microsoft.com", "apple.com",
+    "github.com", "stackoverflow.com", "wikipedia.org",
+    "python.org", "apache.org", "mozilla.org",
+    "youtube.com", "linkedin.com", "twitter.com"
 ]
 
 URGENTNE_RIJECI = [

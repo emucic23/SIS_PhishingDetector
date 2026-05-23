@@ -5,14 +5,14 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from config import PRAG_PHISHING, PRAG_SUMNJIVO, PUTANJA_DATASET, PUTANJA_REZULTATI
+from config import PRAG_PHISHING, PRAG_SUMNJIVO, PUTANJA_DATASET, WHITELIST_DOMENA
 from sender_checker import provjeri_posiljatelja
 from language_checker import provjeri_jezik
 from url_checker import provjeri_urlove
 
 
 def ucitaj_dataset():
-    df = pd.read_csv(PUTANJA_DATASET)          
+    df = pd.read_csv(PUTANJA_DATASET)
     print(f"Učitano {len(df)} emailova")
     print(f"Stupci: {list(df.columns)}")
     return df
@@ -26,10 +26,15 @@ def odredi_klasifikaciju(ukupni_bodovi):
     return "LEGITIMNO"
 
 
+def je_whitelisted_sender(from_adresa):
+    from_lower = from_adresa.lower()
+    return any(domena in from_lower for domena in WHITELIST_DOMENA)
+
+
 def analiziraj_email(row):
     from_adresa = str(row.get("sender", ""))
     subject = str(row.get("subject", ""))
-    body = str(row.get("body", ""))            
+    body = str(row.get("body", ""))
     reply_to = ""
 
     rezultat_posiljatelja = provjeri_posiljatelja(from_adresa, reply_to)
@@ -42,7 +47,12 @@ def analiziraj_email(row):
         rezultat_urlova["bodovi"]
     )
 
-    stvarna_oznaka = int(row.get("label", 0))  
+    whitelist_korekcija = 0
+    if je_whitelisted_sender(from_adresa):
+        whitelist_korekcija = -2
+        ukupni_bodovi = max(0, ukupni_bodovi + whitelist_korekcija)
+
+    stvarna_oznaka = int(row.get("label", 0))
 
     return {
         "subject": subject[:50],
@@ -50,6 +60,7 @@ def analiziraj_email(row):
         "bodovi_posiljatelj": rezultat_posiljatelja["bodovi"],
         "bodovi_jezik": rezultat_jezika["bodovi"],
         "bodovi_url": rezultat_urlova["bodovi"],
+        "whitelist_korekcija": whitelist_korekcija,
         "ukupni_bodovi": ukupni_bodovi,
         "klasifikacija": odredi_klasifikaciju(ukupni_bodovi),
         "stvarna_oznaka": stvarna_oznaka
@@ -93,7 +104,8 @@ def spremi_rezultate(rezultati):
     with open(putanja, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=[
             "subject", "from", "bodovi_posiljatelj", "bodovi_jezik",
-            "bodovi_url", "ukupni_bodovi", "klasifikacija", "stvarna_oznaka"
+            "bodovi_url", "whitelist_korekcija", "ukupni_bodovi",
+            "klasifikacija", "stvarna_oznaka"
         ])
         writer.writeheader()
         writer.writerows(rezultati)
@@ -111,21 +123,19 @@ def pokreni_evaluaciju():
         if (i + 1) % 500 == 0:
             print(f"Analizirano {i + 1}/{len(df)} emailova...")
 
-    # Primjeri phishing emailova
     print("\nPrimjeri phishing emailova:")
     phishing_primjeri = [r for r in rezultati if r["stvarna_oznaka"] == 1][:3]
     for p in phishing_primjeri:
         print(f"  Subject: {p['subject']}")
-        print(f"  Bodovi:  {p['ukupni_bodovi']} (posiljatelj={p['bodovi_posiljatelj']}, jezik={p['bodovi_jezik']}, url={p['bodovi_url']})")
+        print(f"  Bodovi:  {p['ukupni_bodovi']} (posiljatelj={p['bodovi_posiljatelj']}, jezik={p['bodovi_jezik']}, url={p['bodovi_url']}, whitelist={p['whitelist_korekcija']})")
         print(f"  Klasifikacija: {p['klasifikacija']}")
         print()
 
-    # Primjeri lažno pozitivnih (ham klasificiran kao phishing)
     print("Primjeri lažno pozitivnih (ham → PHISHING/SUMNJIVO):")
     fp_primjeri = [r for r in rezultati if r["klasifikacija"] in ["PHISHING", "SUMNJIVO"] and r["stvarna_oznaka"] == 0][:3]
     for p in fp_primjeri:
         print(f"  Subject: {p['subject']}")
-        print(f"  Bodovi:  {p['ukupni_bodovi']} (posiljatelj={p['bodovi_posiljatelj']}, jezik={p['bodovi_jezik']}, url={p['bodovi_url']})")
+        print(f"  Bodovi:  {p['ukupni_bodovi']} (posiljatelj={p['bodovi_posiljatelj']}, jezik={p['bodovi_jezik']}, url={p['bodovi_url']}, whitelist={p['whitelist_korekcija']})")
         print()
 
     izracunaj_metriku(rezultati)
