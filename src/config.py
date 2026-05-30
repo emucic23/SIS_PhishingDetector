@@ -6,9 +6,9 @@ BODOVI_ANOMALIJE_JEZIKA = 3
 PRAG_PHISHING = 4
 PRAG_SUMNJIVO = 2
 
-MAILPIT_HOST = "mailpit"
+MAILPIT_HOST = "localhost"
 MAILPIT_PORT = 1025
-MAILPIT_API = "http://mailpit:8025/api"
+MAILPIT_API = "http://localhost:8025/api"
 
 PUTANJA_DATASET = "data/phishing_dataset_novi.csv"
 PUTANJA_REZULTATI = "results/results.csv"
